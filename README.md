@@ -4,28 +4,19 @@
 
 This is a PyTorch implementation of the homework of CS294-112 at UC Berkeley on Reinforcement Learning (RL).
 
-The Chinese tutorial of this implementation as well as the theoratical explanination is on the serial artical at Zhihu.com. Here're the links:
+The Chinese tutorials of this projects as well as the theoratical explanination are posted at Zhihu.com. Here're the links: 
 
-* [CS294强化学习课程作业（一）：Imitation Learning](https://zhuanlan.zhihu.com/p/55397927)
+(Prefix: CS294 Reinforcement Learning Course Notes (No.)...)
+
+* [CS294强化学习课程笔记（一）Imitation Learning](https://zhuanlan.zhihu.com/p/55397927)
+* [CS294强化学习课程笔记（二）Policy Gradient](https://zhuanlan.zhihu.com/p/55660949)
 * ...
 
 Mark Zhenghao Peng
 
+## Usage
 
-## The environments
-
-Here are the statistics of the action and observation spaces of those RL environments involved in this course.
-
-|Environments|Action Space|Observation Space|
-|:---:|:---:|:---:|
-|Ant-v2|(#,1,8)|(#,111)|
-|HalfCheetah-v2|(#,1,6)|(#,17)|
-|Hopper-v2|(#,1,3)|(#,11)|
-|Humanoid-v2|(#,1,17)|(#,376)|
-|Reacher-v2|(#,1,2)|(#,11)|
-|Walker2d-v2|(#,1,6)|(#,17)|
-
-Note: # means the number of samples.
+Take a look, modify, and then run `bash run.sh` file at each directory.
 
 ## Behavioral Cloning (HW1)
 
@@ -85,3 +76,20 @@ Setting the number of iteration, namely the loop of DAgger, to 10, experimental 
 In the figure above, vertical line segments are the error bar denoting the standard deviation of the summed rewards among different episodes. Except the experiment represented by the brown line, whose number of epochs is 10, other experiments use 50 as the number of the epoch, that is, 50 times the whole dataset has been fed to train the network.
 
 We can see from the figure that, generally speaking, the DAgger has better performance compared to the BC method, though the performance is highly unstable.
+
+## Policy Gradient (HW2)
+For the problem 4, the following two figures show the influence of *reward to go strategy*, advantage normalization, and the batch size.
+
+![](fig/hw2-1.png)
+The figure above shows the small batch (bs=1000) circumstance. We can see that the reward to go strategy help the convergence of the learning (Green, Red is better than Blue). The advantage normalization help to stablize the learning (compare the Green and Red).
+
+![](fig/hw2-2.png)
+
+The figure above shows the large batch (bs=5000) circumstance. There is no doubt that the large batch size really helps for convergence. Reward to go, agian, accelerates the training. Advantage normalization shows little influcence under the large batch circumstance.
+
+For the problem 5, we did the grid search among learning rate and batch size at InvertedPendulum environment. The results is on the following figure and show a well-known fact that the performance of reinforcement learning algorithm is sensitive to the hyperparameters.
+
+![](fig/hw2-3.png)
+
+We can see that only two set of hypter parameters, namely the (bs=1000, lr=0.01) and (bs=5000, lr=0.01), have acceptable performance.
+
