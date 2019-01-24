@@ -8,8 +8,8 @@ The Chinese tutorials of this projects as well as the theoratical explanination 
 
 (Prefix: CS294 Reinforcement Learning Course Notes (No.)...)
 
-* [CS294强化学习课程笔记（一）Imitation Learning](https://zhuanlan.zhihu.com/p/55397927)
-* [CS294强化学习课程笔记（二）Policy Gradient](https://zhuanlan.zhihu.com/p/55660949)
+* [CS294强化学习课程笔记（一）Imitation Learning](https://zhuanlan.zhihu.com/p/55397927)
+* [CS294强化学习课程笔记（二）Policy Gradient](https://zhuanlan.zhihu.com/p/55660949)
 * ...
 
 Mark Zhenghao Peng
