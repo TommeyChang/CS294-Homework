@@ -3,3 +3,8 @@
 *.pkl
 
 *.pyc
+*.iml
+
+*.txt
+
+*.json
