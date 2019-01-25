@@ -26,5 +26,4 @@
 # Problem 7
 # Limited by the GPU memory, I have to reduce batch size from 40000 to 10000,
 # and reduce the number of process from 3 to 2.
-nohup python train_pg_f18.py LunarLanderContinuous-v2 -ep=1000 --discount=0.99 -n=100 \
--e=2 -l=2 -s=64 -b=10000 -lr=0.005 -rtg --nn_baseline --exp_name=ll_b40000_r0.005
+nohup bash one_exp.sh &
