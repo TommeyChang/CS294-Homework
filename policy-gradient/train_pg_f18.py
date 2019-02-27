@@ -125,13 +125,13 @@ class Agent(object):
 
         self.policy = None  # The loss function is computed at self.update_parameters.
         if self.discrete:
-            self.policy = CategoricalPolicy(self.ob_dim, self.ac_dim)
+            self.policy = CategoricalPolicy(self.ob_dim, self.ac_dim).to(self.device)
         else:
-            self.policy = GaussianPolicy(self.ob_dim, self.ac_dim)
+            self.policy = GaussianPolicy(self.ob_dim, self.ac_dim).to(self.device)
 
         self.optimizer = torch.optim.Adam(self.policy.parameters(), lr=self.learning_rate)
         if self.nn_baseline:
-            self.baseline_prediction = Net(self.ob_dim, 1)
+            self.baseline_prediction = Net(self.ob_dim, 1).to(self.device)
             self.baseline_loss = nn.MSELoss()
             self.baseline_optimizer = torch.optim.Adam(self.baseline_prediction.parameters(), lr=self.learning_rate)
 
@@ -202,16 +202,20 @@ class Agent(object):
 
     def update_parameters(self, ob_no, log_prob_na, q_n, adv_n):
         if self.nn_baseline:
+            self.baseline_prediction.train()
             prediction = self.baseline_prediction(torch.from_numpy(ob_no).to(self.device).unsqueeze(0))
             self.baseline_optimizer.zero_grad()
             target = normalize(torch.from_numpy(q_n).to(self.device)).type_as(prediction)
             loss = self.baseline_loss(input=prediction, target=target)
             loss.backward()
             self.baseline_optimizer.step()
+            self.baseline_prediction.eval()
+        self.policy.train()
         self.optimizer.zero_grad()
         loss = -torch.mean(log_prob_na.type_as(adv_n) * adv_n)
         loss.backward()
         self.optimizer.step()
+        self.policy.eval()
 
 
 def train_PG(args, logdir, seed):
