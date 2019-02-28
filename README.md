@@ -10,9 +10,10 @@ The Chinese tutorials of this projects as well as the theoratical explanination 
 
 * [CS294强化学习课程笔记（一）Imitation Learning](https://zhuanlan.zhihu.com/p/55397927)
 * [CS294强化学习课程笔记（二）Policy Gradient](https://zhuanlan.zhihu.com/p/55660949)
+* [CS294强化学习课程笔记（三）：Actor-Critic](https://zhuanlan.zhihu.com/p/57879969)
 * ...
 
-Mark Zhenghao Peng
+*Zhenghao Peng*
 
 ## Usage
 
@@ -96,3 +97,19 @@ We can observe from the figure above that only two set of hypter parameters, nam
 ![](fig/hw2-3.png)
 
 The figure above shows the performance of large batch (bs=10000) with three different random seeds, under the LunarLanderContinuous-v2 environment. It's clear that the random seeds do not differ the performance. The return drop happening at 20 iteration is attributed to the structure of the environment (namely the reward function).
+
+## Actor-Critic (HW3)
+
+The first series of experiment investigate the impact of two hyperparameter introduced by Actor-Critic: the number of target updates (we call it "big iteration", means how many regression steps took for updating Critic), the number of gradients steps per target update (we call it "small itertaion", means how many gradients update steps took for one regression step to fit the target). Please refer to the codes or lectures for more details.
+
+![](fig/hw3-1.png)
+
+The above figure shows the how different hyperparameters influence the performance in the CartPole benchmark. The experiment names are defined as "ac\_{big iter}\_{small iter}". We can see that if we use large small iteration, which means the target of the regression may be out of date and cannot represent the real value function since it's computed via the old value network, the training may be unstable. The result "lb\_rtg\_na" is directly copied from the Policy Gradient experiment as a baseline.
+
+![](fig/hw3-2.png)
+
+The above figure shows a different perspective of those experiments. We can see that though achieve similar performance for Actor-Critic algorithm with the Policy Gradient algorithm, the computing overhead is drasticaly reduced using Actor-Critic.
+
+![](fig/hw3-3.png)
+
+The figure above shows the result of InvertedPendulum benchmark. We can see that though "big iter=10, small iter=10" achieve fastest training, the stability of training of such experiment using multiple gradients step in regression is doubting.
