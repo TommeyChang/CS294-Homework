@@ -94,7 +94,7 @@ For the problem 5, we did the grid search among learning rate and batch size at 
 
 We can observe from the figure above that only two set of hypter parameters, namely the (bs=1000, lr=0.01) and (bs=5000, lr=0.01), have acceptable performance.
 
-![](fig/hw2-3.png)
+![](fig/hw2-4.png)
 
 The figure above shows the performance of large batch (bs=10000) with three different random seeds, under the LunarLanderContinuous-v2 environment. It's clear that the random seeds do not differ the performance. The return drop happening at 20 iteration is attributed to the structure of the environment (namely the reward function).
 
